@@ -14,7 +14,7 @@ The stopwatch functions properly on the page, and is customized with our clock m
 can select the task before starting the stopwatch.
 
 <p align = "center">
-  <img width="200" alt="Screenshot 2024-04-24 at 2 23 06 AM" src="https://github.com/joooanneliu/ait-app/assets/63427747/21d099e6-16e7-4078-96ac-3e01ecea5407">
   <img width="200" alt="Screenshot 2024-04-24 at 2 22 58 AM" src="https://github.com/joooanneliu/ait-app/assets/63427747/e4c224df-c19b-4033-8de4-7e9a09fbce6d">
+  <img width="200" alt="Screenshot 2024-04-24 at 2 23 06 AM" src="https://github.com/joooanneliu/ait-app/assets/63427747/21d099e6-16e7-4078-96ac-3e01ecea5407">
 </p>
 
