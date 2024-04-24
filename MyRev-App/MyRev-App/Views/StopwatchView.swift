@@ -9,6 +9,7 @@ struct StopwatchView: View {
     
     @ObservedObject var managerClass = ManagerClass()
     @ObservedObject var todoModel = TodoModel.shared
+    @State private var timerStart:Bool = false
     
     var body: some View {
         NavigationStack{
@@ -29,7 +30,10 @@ struct StopwatchView: View {
                 case .stopped:
                     // adds play button, time reset to 0.0
                     withAnimation{
-                        Button(action: {managerClass.start()}, label: {
+                        Button(action: {
+                            managerClass.start()
+                            timerStart = true
+                        }, label: {
                             Image("clock-resume")
                         })
                     }
@@ -76,6 +80,7 @@ struct StopwatchView: View {
                 withAnimation{
                     Button(action: {
                         managerClass.stop()
+                        timerStart = false
                     }, label: {
                         Text("End Session")
                             .font(.largeTitle)
@@ -86,6 +91,8 @@ struct StopwatchView: View {
                             .background(Color("DarkBlue"))
                             .cornerRadius(75)
                     }).padding(.bottom, 20)
+                        .disabled(!timerStart)
+                        .opacity(timerStart ? 1.0 : 0.0)
                 }
             
                 
