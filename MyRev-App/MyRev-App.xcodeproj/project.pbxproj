@@ -15,7 +15,7 @@
 		0040B3DB2B8C1B4500DA8EFE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040B3DA2B8C1B4500DA8EFE /* ContentView.swift */; };
 		0040B3DD2B8C1B4800DA8EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0040B3DC2B8C1B4800DA8EFE /* Assets.xcassets */; };
 		0040B3E02B8C1B4800DA8EFE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0040B3DF2B8C1B4800DA8EFE /* Preview Assets.xcassets */; };
-		00561EB32BD8D4CA00D1E619 /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00561EB22BD8D4CA00D1E619 /* TasksList.swift */; };
+		00561EB32BD8D4CA00D1E619 /* NewTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00561EB22BD8D4CA00D1E619 /* NewTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +28,7 @@
 		0040B3DA2B8C1B4500DA8EFE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0040B3DC2B8C1B4800DA8EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0040B3DF2B8C1B4800DA8EFE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		00561EB22BD8D4CA00D1E619 /* TasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksList.swift; sourceTree = "<group>"; };
+		00561EB22BD8D4CA00D1E619 /* NewTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				0003AD992BD771CF00D2A074 /* TodoView.swift */,
-				00561EB22BD8D4CA00D1E619 /* TasksList.swift */,
+				00561EB22BD8D4CA00D1E619 /* NewTask.swift */,
 				0003AD9B2BD773E900D2A074 /* StopwatchView.swift */,
 				0003ADA12BD7752A00D2A074 /* InsightView.swift */,
 			);
@@ -160,7 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00561EB32BD8D4CA00D1E619 /* TasksList.swift in Sources */,
+				00561EB32BD8D4CA00D1E619 /* NewTask.swift in Sources */,
 				0003AD9A2BD771CF00D2A074 /* TodoView.swift in Sources */,
 				0040B3DB2B8C1B4500DA8EFE /* ContentView.swift in Sources */,
 				0003AD9C2BD773E900D2A074 /* StopwatchView.swift in Sources */,

@@ -8,7 +8,7 @@ import SwiftUI
 struct StopwatchView: View {
     
     @ObservedObject var managerClass = ManagerClass()
-    @ObservedObject var todoModel = TodoModel()
+    @ObservedObject var todoModel = TodoModel.shared
     
     var body: some View {
         NavigationStack{
@@ -52,12 +52,27 @@ struct StopwatchView: View {
                     
                 }
                 Spacer()
-                VStack {
+                
+                VStack(spacing: 16) {
                     // Access todoModel.arr here
                     ForEach(todoModel.arr.indices, id: \.self) { index in
-                        Text(todoModel.arr[index])
+                        HStack {
+                            Text(todoModel.arr[index].name)
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity)
+                        .cornerRadius(75)
+                        .fontWeight(.black)
+                        .foregroundColor(.white)
+                        .padding(.vertical)
+                        .padding(.horizontal, 40)
+                        .background(
+                            RoundedRectangle(cornerRadius: 75) // Apply corner radius to the RoundedRectangle
+                                .fill(Color("PalePink"))
+                        )
                     }
-                }
+                }.padding(30)
+                
                 withAnimation{
                     Button(action: {
                         managerClass.stop()
@@ -72,6 +87,7 @@ struct StopwatchView: View {
                             .cornerRadius(75)
                     }).padding(.bottom, 20)
                 }
+            
                 
             } // end of VStack
         }
@@ -119,6 +135,14 @@ struct StopwatchView_Previews: PreviewProvider {
     static var previews: some View {
         StopwatchView()
     }
+}
+
+
+func getFormattedDate() -> String {
+    let formatter = DateFormatter()
+    // formats the date so it is month/date, weekday
+    formatter.dateFormat = "M/d, EE"
+    return formatter.string(from: Date())
 }
 
 func getFormattedTime() -> String {
