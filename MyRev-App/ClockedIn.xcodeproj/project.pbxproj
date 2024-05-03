@@ -125,7 +125,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0040B3D02B8C1B4500DA8EFE /* Build configuration list for PBXProject "MyRev-App" */;
+			buildConfigurationList = 0040B3D02B8C1B4500DA8EFE /* Build configuration list for PBXProject "ClockedIn" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -353,7 +353,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0040B3D02B8C1B4500DA8EFE /* Build configuration list for PBXProject "MyRev-App" */ = {
+		0040B3D02B8C1B4500DA8EFE /* Build configuration list for PBXProject "ClockedIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0040B3E12B8C1B4800DA8EFE /* Debug */,

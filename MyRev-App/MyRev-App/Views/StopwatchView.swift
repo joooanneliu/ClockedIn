@@ -80,7 +80,7 @@ struct StopwatchView: View {
                 withAnimation{
                     Button(action: {
                         managerClass.stop()
-                        timerStart = false
+                        timerStart = false          
                     }, label: {
                         Text("End Session")
                             .font(.largeTitle)

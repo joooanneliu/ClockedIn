@@ -65,7 +65,8 @@ struct NewTask: View {
                             .background(Color("DarkBlue"))
                             .cornerRadius(75)
                     }).padding(.bottom, 20)
-                    
+                        .disabled(taskName == "")
+                        .opacity(taskName == "" ? 0.5 : 1.0)
                     
                 } // end of vstack
             }
