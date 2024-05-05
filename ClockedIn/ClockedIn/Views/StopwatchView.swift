@@ -11,7 +11,7 @@ struct StopwatchView: View {
     @ObservedObject var managerClass = ManagerClass()
     @ObservedObject var todoModel = TodoModel.shared
     @State private var timerStart:Bool = false
-    @State private var timerRunning:Bool = false
+    @State private var timerPaused:Bool = false
     
     // env variable to control pop-up
     @Environment(\.presentationMode) var addMode
@@ -41,7 +41,6 @@ struct StopwatchView: View {
                             managerClass.start()
                             timerStart = true
                             todoModel.addStartTime(for: task.id)
-                            timerRunning = true
                         }, label: {
                             Image("clock-resume")
                                 .resizable()
@@ -54,7 +53,7 @@ struct StopwatchView: View {
                         Button(action: {
                             managerClass.pause()
                             todoModel.addEndTime(for: task.id)
-                            timerRunning = false
+                            timerPaused = true
                         }, label: {
                             Image("clock-pause")
                                 .resizable()
@@ -67,7 +66,7 @@ struct StopwatchView: View {
                         Button(action: {
                             managerClass.start()
                             todoModel.addStartTime(for: task.id)
-                            timerRunning = true
+                            timerPaused = false
                         } , label: {
                             Image("clock-resume")
                                 .resizable()
@@ -98,6 +97,9 @@ struct StopwatchView: View {
                     Button(action: {
                         managerClass.stop()
                         timerStart = false
+                        if(!timerPaused) {
+                            todoModel.addEndTime(for: task.id)
+                        }
                         todoModel.removeTask(task)
                     }, label: {
                         Text("Complete Task")
@@ -117,7 +119,9 @@ struct StopwatchView: View {
                     Button(action: {
                         managerClass.stop()
                         timerStart = false
-                        todoModel.addEndTime(for: task.id)
+                        if(!timerPaused) {
+                            todoModel.addEndTime(for: task.id)
+                        }
                         addMode.wrappedValue.dismiss() // Dismiss the StopwatchView
                     }, label: {
                         Text("End Session")
@@ -129,9 +133,8 @@ struct StopwatchView: View {
                             .background(Color("DarkBlue"))
                             .cornerRadius(75)
                     }).padding(.bottom, 20)
-                        .disabled(!timerStart && timerRunning)
+                        .disabled(!timerStart)
                         .opacity(timerStart ? 1.0 : 0.0)
-                        .opacity(timerRunning ? 0.5 : 1.0)
                 }
                 
                 // Button for if user wants to go back to stopwatchList before stopwatch starts

@@ -51,6 +51,7 @@ struct StopwatchListView: View {
                             HStack {
                                 Text(task.name)
                                 Spacer()
+                                Image(systemName: "arrow.forward")
                             }
                             .frame(maxWidth: .infinity)
                             .cornerRadius(75)
@@ -60,7 +61,7 @@ struct StopwatchListView: View {
                             .padding(.horizontal, 40)
                             .background(
                                 RoundedRectangle(cornerRadius: 75)
-                                    .fill(Color("PalePink"))
+                                    .fill(getBackgroundColor(for: task.category))
                             )
                         }
                     }
@@ -89,6 +90,19 @@ struct StopwatchListView: View {
                 
                 Spacer()
             }
+        }
+    }
+    
+    func getBackgroundColor(for category: String) -> Color {
+        switch category {
+        case "School":
+            return Color("PalePink")
+        case "Personal":
+            return Color("LightGreen")
+        case "Work":
+            return Color("LightBlue")
+        default:
+            return Color.gray
         }
     }
 }

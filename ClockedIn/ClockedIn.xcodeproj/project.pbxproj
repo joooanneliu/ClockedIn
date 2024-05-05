@@ -15,7 +15,7 @@
 		005792CB2BE5672700A9AA01 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005792CA2BE5672700A9AA01 /* TodoModel.swift */; };
 		005792CD2BE5675300A9AA01 /* NewTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005792CC2BE5675300A9AA01 /* NewTask.swift */; };
 		005792CF2BE5676800A9AA01 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005792CE2BE5676800A9AA01 /* StopwatchView.swift */; };
-		005792D12BE567F500A9AA01 /* InsightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005792D02BE567F500A9AA01 /* InsightView.swift */; };
+		005792D12BE567F500A9AA01 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005792D02BE567F500A9AA01 /* SummaryView.swift */; };
 		005792D32BE5691200A9AA01 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005792D22BE5691200A9AA01 /* GoogleService-Info.plist */; };
 		005792D72BE569F100A9AA01 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 005792D62BE569F100A9AA01 /* FirebaseDatabase */; };
 		005792D92BE569F100A9AA01 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 005792D82BE569F100A9AA01 /* FirebaseFirestore */; };
@@ -34,7 +34,7 @@
 		005792CA2BE5672700A9AA01 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		005792CC2BE5675300A9AA01 /* NewTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTask.swift; sourceTree = "<group>"; };
 		005792CE2BE5676800A9AA01 /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
-		005792D02BE567F500A9AA01 /* InsightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightView.swift; sourceTree = "<group>"; };
+		005792D02BE567F500A9AA01 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		005792D22BE5691200A9AA01 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		005792DE2BE580C500A9AA01 /* StopwatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,7 +99,7 @@
 				005792C82BE566FD00A9AA01 /* TodoView.swift */,
 				005792DE2BE580C500A9AA01 /* StopwatchListView.swift */,
 				005792CE2BE5676800A9AA01 /* StopwatchView.swift */,
-				005792D02BE567F500A9AA01 /* InsightView.swift */,
+				005792D02BE567F500A9AA01 /* SummaryView.swift */,
 				005792CC2BE5675300A9AA01 /* NewTask.swift */,
 			);
 			path = Views;
@@ -195,7 +195,7 @@
 				005792C92BE566FD00A9AA01 /* TodoView.swift in Sources */,
 				005792CB2BE5672700A9AA01 /* TodoModel.swift in Sources */,
 				005792CD2BE5675300A9AA01 /* NewTask.swift in Sources */,
-				005792D12BE567F500A9AA01 /* InsightView.swift in Sources */,
+				005792D12BE567F500A9AA01 /* SummaryView.swift in Sources */,
 				005792BC2BE566CF00A9AA01 /* ContentView.swift in Sources */,
 				005792BA2BE566CF00A9AA01 /* ClockedInApp.swift in Sources */,
 				005792DF2BE580C500A9AA01 /* StopwatchListView.swift in Sources */,
