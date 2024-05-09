@@ -57,6 +57,7 @@ struct StopwatchListView: View {
                             .cornerRadius(75)
                             .fontWeight(.black)
                             .foregroundColor(.white)
+                            //.foregroundColor(Color("CustomGray"))
                             .padding(.vertical)
                             .padding(.horizontal, 40)
                             .background(
@@ -105,6 +106,7 @@ struct StopwatchListView: View {
             return Color.gray
         }
     }
+    
 }
 
 #Preview {

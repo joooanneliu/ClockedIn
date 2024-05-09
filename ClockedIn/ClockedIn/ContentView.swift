@@ -3,11 +3,6 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-//            TodoView()
-//                .tabItem {
-//                    Image(systemName: "list.clipboard")
-//                    Text("To-do")
-//                }
             StopwatchListView()
                 .tabItem {
                     Image(systemName: "clock")

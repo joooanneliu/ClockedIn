@@ -4,12 +4,15 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct SummaryView: View {
     
     @State private var selectedDate = Date()
     @ObservedObject var todoModel = TodoModel.shared
     @State private var isToday = false
+    @State private var isAfterToday = true
+    @State private var isCalendarVisible = false
 
     var body: some View {
         VStack {
@@ -21,12 +24,26 @@ struct SummaryView: View {
                     updateTodayStatus()
                 }) {
                     Image(systemName: "arrow.left")
+                        .font(.system(size: 20))
                 }
                 .padding()
                 
                 Spacer()
                 
-                Text("\(selectedDate, formatter: dateFormatter)")
+                Button(action: {
+                    isCalendarVisible.toggle()
+                }) {
+                    Image(systemName: "calendar")
+                        .font(.system(size: 25))
+                }
+                .padding()
+                .popover(isPresented: $isCalendarVisible, attachmentAnchor: .point(.bottom), content: {
+                    CalendarPopOver(selectedDate: $selectedDate, isCalendarVisible: $isCalendarVisible)
+                        .presentationCompactAdaptation(.popover)
+                        .frame(width: 350)
+                })
+                
+                Text("\(selectedDate, formatter: dateFormatter)") .font(.system(size: 20))
                 
                 Spacer()
                 
@@ -36,11 +53,13 @@ struct SummaryView: View {
                     updateTodayStatus()
                 }) {
                     Image(systemName: "arrow.right")
-                        .opacity(isToday ? 0.5 : 1.0)
-                        .disabled(isToday)
+                        .font(.system(size: 20))
                 }
+                .opacity(isToday ? 0.5 : 1.0)
+                .opacity(isAfterToday ? 0.5 : 1.0)
+                .disabled(isAfterToday || isToday)
                 .padding()
-            } // end HStack
+            } // end of HStack
             ScrollView {
                 LazyVStack {
                     VStack(spacing: 10) {
@@ -51,7 +70,9 @@ struct SummaryView: View {
                         }
                         
                         Spacer()
-                        ForEach(todoModel.sortedStartEndTimes(forDate: selectedDate), id: \.self) { timePair in
+                        
+                        let sortedTimes = todoModel.sortedStartEndTimes(forDate: selectedDate)
+                        ForEach(sortedTimes, id: \.self) { timePair in
                             let task = todoModel.getTask(for: timePair.startTime)
                             VStack(alignment: .leading) {
                                 Text("\(task.taskName)")
@@ -65,11 +86,21 @@ struct SummaryView: View {
                             }
                             .foregroundColor(.white)
                             .padding()
+                            .frame(width: 300, height: self.getHeight( timePair.startTime))
                             .background(
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(getBackgroundColor(for: task.category))
+                                
                             )
                         }
+                        
+                        if sortedTimes.isEmpty {
+                            Text("No data available")
+                                .foregroundColor(.black)
+                                .font(.system(size: 20))
+                                .padding()
+                        }
+                        
                     } // end of VStack
                     .padding(20)
                 }
@@ -90,6 +121,7 @@ struct SummaryView: View {
         
     func updateTodayStatus() {
         isToday = Calendar.current.isDate(selectedDate, inSameDayAs: Date())
+        isAfterToday = selectedDate > Date()
     }
     
     func getBackgroundColor(for category: String) -> Color {
@@ -103,6 +135,40 @@ struct SummaryView: View {
         default:
             return Color.gray
         }
+    }
+    
+
+    func getHeight(_ startTime: Timestamp)-> CGFloat {
+        
+        let duration:TimeInterval = todoModel.getDuration(startTime)
+        let minHeight: CGFloat = 150
+        let scaleFactor: CGFloat = 10
+       
+        // every 15 minutes, increase height by 5
+        let scaledHeight = round((CGFloat(duration) - 900) / 900) * scaleFactor
+        
+        let height = minHeight + scaledHeight
+        
+        // any instance than 15 minutes will be set to minHeight
+        return max(height, scaledHeight)
+    }
+}
+
+struct CalendarPopOver: View {
+    @Binding var selectedDate: Date
+    @Binding var isCalendarVisible: Bool
+    
+    var body: some View {
+        VStack {
+            DatePicker("", selection: $selectedDate, displayedComponents: [.date])
+                .datePickerStyle(GraphicalDatePickerStyle())
+                .padding(.horizontal)
+                .onChange(of: selectedDate) {
+                    isCalendarVisible = false
+                }
+                
+        }
+        .padding()
     }
 }
 

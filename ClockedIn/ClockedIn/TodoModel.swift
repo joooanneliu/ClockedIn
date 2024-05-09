@@ -10,19 +10,14 @@ class TodoModel: ObservableObject {
     @Published var stopwatchTimes = [StopwatchTime]()
     
     func addTask(_ newTask: TaskModel) {
-//        print("add task")
-//        print()
         let taskID = UUID().uuidString
         
         var newTask = newTask
         newTask.id = taskID
         
-        // arr.append(newTask)
-        
         db.collection("Tasks").document(taskID).setData([
             "taskName": newTask.name,
-            "category": newTask.category,
-            "active": true
+            "category": newTask.category
         ]) { err in
             if let err = err {
                 print("Error adding task: \(err)")
@@ -48,10 +43,6 @@ class TodoModel: ObservableObject {
     }
     
     func removeTask(_ task: TaskModel) {
-//        print("remove task")
-//        print()
-        // Remove the task from the database
-        
         // Remove from "Tasks" collection
         let db = Firestore.firestore()
         db.collection("Tasks").document(task.id).delete { error in

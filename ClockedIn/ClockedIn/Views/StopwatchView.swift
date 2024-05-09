@@ -87,7 +87,7 @@ struct StopwatchView: View {
                         .padding(.horizontal, 20)
                         .background(
                             RoundedRectangle(cornerRadius: 75)
-                                .fill(Color("PalePink"))
+                                .fill(getBackgroundColor(for: task.category))
                         )
                 }
                 
@@ -97,7 +97,7 @@ struct StopwatchView: View {
                     Button(action: {
                         managerClass.stop()
                         timerStart = false
-                        if(!timerPaused) {
+                        if(!timerPaused && timerStart) {
                             todoModel.addEndTime(for: task.id)
                         }
                         todoModel.removeTask(task)
@@ -112,14 +112,13 @@ struct StopwatchView: View {
                             .cornerRadius(75)
                     }).padding(.bottom, 20)
                         .disabled(!timerStart)
-                        .opacity(timerStart ? 1.0 : 0.0)
                 }
                 
                 withAnimation{
                     Button(action: {
                         managerClass.stop()
                         timerStart = false
-                        if(!timerPaused) {
+                        if(timerStart && !timerPaused) {
                             todoModel.addEndTime(for: task.id)
                         }
                         addMode.wrappedValue.dismiss() // Dismiss the StopwatchView
@@ -162,6 +161,19 @@ struct StopwatchView: View {
         .onDisappear{
             managerClass.mode = .stopped
             timerStart = false
+        }
+    }
+    
+    func getBackgroundColor(for category: String) -> Color {
+        switch category {
+        case "School":
+            return Color("PalePink")
+        case "Personal":
+            return Color("LightGreen")
+        case "Work":
+            return Color("LightBlue")
+        default:
+            return Color.gray
         }
     }
 }
