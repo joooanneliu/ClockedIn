@@ -17,13 +17,7 @@ struct StopwatchListView: View {
         NavigationView {
             
             VStack(spacing: 0) {
-                HStack{
-                    Spacer()
-                    Text(getFormattedTime())
-                        .padding(.horizontal, 20)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color("DarkBlue"))
-                }.padding(.top, 5)
+                
                 ZStack {
                     Rectangle()
                         .foregroundColor(Color("DarkBlue"))
@@ -32,6 +26,9 @@ struct StopwatchListView: View {
                     
                     HStack {
                         Image("clock")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 150, height: 150)
                         Text(getFormattedDate())
                             .padding(.horizontal, 8)
                             .font(.largeTitle)
@@ -39,7 +36,7 @@ struct StopwatchListView: View {
                             .foregroundColor(.white)
                     }
                     
-                }.padding(.top, -40)
+                }.padding(.top, 10)
                 
                 Text("select task:")
                     .padding(.top, 20)
@@ -68,6 +65,9 @@ struct StopwatchListView: View {
                     }
                 }
                 .padding(30)
+                .onAppear {
+                    todoModel.fetchTasks()
+                }
                 .onReceive(NotificationCenter.default.publisher(for: Notification.Name("dismissNewTaskView"))) { _ in
                     // Fetch tasks when NewTaskView is dismissed
                     todoModel.fetchTasks()
@@ -75,14 +75,14 @@ struct StopwatchListView: View {
                 .sheet(item: $selectedTask) { task in
                     StopwatchView(task: task)
                 }
-                .onAppear {
-                    todoModel.fetchTasks()
-                }
         
                 Button(action: {
                     showNewTaskView = true // Present NewTask view
                 }) {
                     Image("clock-add")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 80, height: 80)
                 }
                 .sheet(isPresented: $showNewTaskView) {
                     NewTask(isPresented: $showNewTaskView) // Pass binding to control pop up

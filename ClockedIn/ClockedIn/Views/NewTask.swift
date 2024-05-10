@@ -11,13 +11,14 @@ struct NewTask: View {
     @ObservedObject var todoModel = TodoModel.shared
     @Binding var isPresented: Bool
     @State private var taskName: String = ""
-    let categories = ["Select", "Personal", "School", "Work"]
+    let categories = ["Personal", "School", "Work"]
     @State private var selectedOption:Int = 0
     // @State private var taskAdded = false
     
     var body: some View {
         NavigationView {
                 VStack(spacing: 0) {
+                    Spacer()
                     VStack (alignment: .leading){
                         Text("New Task Name:")
                             .bold()
@@ -30,10 +31,11 @@ struct NewTask: View {
                                 RoundedRectangle(cornerRadius: 50)
                                     .stroke(Color.black, lineWidth: 1)
                             )
-                        Text("Category (optional):")
+                        Text("Category:")
                             .bold()
                             .foregroundColor(Color("DarkBlue"))
-                        Picker(selection: $selectedOption, label: Text("Options")) {
+                        
+                        Picker(selection: $selectedOption ,label: Text("Options")) {
                             ForEach(categories.indices, id: \.self) { index in
                                 Text(self.categories[index])
                                     .tag(index)
@@ -51,7 +53,7 @@ struct NewTask: View {
                     }.padding(.horizontal, 40)
                         .padding(.top, 20)
                         .padding(.bottom, 40)
-                    
+                    Spacer()
                     Button(action: {
                         todoModel.addTask(ClockedIn.TaskModel(name: taskName, category: categories[selectedOption], id: ""))
                         isPresented = false // Dismiss the NewTask view

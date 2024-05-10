@@ -71,8 +71,6 @@ class TodoModel: ObservableObject {
     }
     
     func fetchTasks() {
-//        print("fetch tasks")
-//        print()
         db.collection("Tasks").getDocuments { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
                 print("Error fetching tasks: \(error?.localizedDescription ?? "Unknown error")")
@@ -125,8 +123,6 @@ class TodoModel: ObservableObject {
     }
     
     func fetchData() {
-//        print("in fetch data")
-//        print()
         db.collection("StopwatchTimes")
             .getDocuments { (querySnapshot, error) in
                 if let error = error {
@@ -158,8 +154,6 @@ class TodoModel: ObservableObject {
     }
     
     func sortedStartEndTimes(forDate date: Date) -> [TimePair] {
-//        print("sorted start end times")
-//        print()
         self.fetchData();
         var allTimes: [TimePair] = []
         for stopwatchTime in self.stopwatchTimes {

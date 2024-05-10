@@ -14,19 +14,12 @@ struct StopwatchView: View {
     @State private var timerPaused:Bool = false
     
     // env variable to control pop-up
-    @Environment(\.presentationMode) var addMode
+    @Environment(\.presentationMode) var timerMode
     
     var task:TaskModel
     
     var body: some View {
         NavigationStack{
-            HStack{
-                Spacer()
-                Text(getFormattedTime())
-                    .padding(.horizontal, 20)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("DarkBlue"))
-            }.padding(.top, 5)
             VStack{
                 Text(managerClass.formattedTime)
                     .font(.system(size: 70))
@@ -96,11 +89,11 @@ struct StopwatchView: View {
                 withAnimation{
                     Button(action: {
                         managerClass.stop()
-                        timerStart = false
                         if(!timerPaused && timerStart) {
                             todoModel.addEndTime(for: task.id)
                         }
                         todoModel.removeTask(task)
+                        timerMode.wrappedValue.dismiss()
                     }, label: {
                         Text("Complete Task")
                             .font(.largeTitle)
@@ -111,17 +104,15 @@ struct StopwatchView: View {
                             .background(Color("DarkBlue"))
                             .cornerRadius(75)
                     }).padding(.bottom, 20)
-                        .disabled(!timerStart)
                 }
                 
                 withAnimation{
                     Button(action: {
                         managerClass.stop()
-                        timerStart = false
                         if(timerStart && !timerPaused) {
                             todoModel.addEndTime(for: task.id)
                         }
-                        addMode.wrappedValue.dismiss() // Dismiss the StopwatchView
+                        timerMode.wrappedValue.dismiss() // Dismiss the StopwatchView
                     }, label: {
                         Text("End Session")
                             .font(.largeTitle)
@@ -141,7 +132,7 @@ struct StopwatchView: View {
                     Button(action: {
                         managerClass.stop()
                         timerStart = false
-                        addMode.wrappedValue.dismiss() // Dismiss the StopwatchView
+                        timerMode.wrappedValue.dismiss() // Dismiss the StopwatchView
                     }, label: {
                         Text("Back")
                             .font(.largeTitle)

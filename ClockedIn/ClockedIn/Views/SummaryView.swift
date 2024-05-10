@@ -20,8 +20,6 @@ struct SummaryView: View {
             HStack {
                 Button(action: {
                     selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) ?? Date()
-                    //todoModel.fetchData(for: selectedDate)
-                    updateTodayStatus()
                 }) {
                     Image(systemName: "arrow.left")
                         .font(.system(size: 20))
@@ -49,15 +47,10 @@ struct SummaryView: View {
                 
                 Button(action: {
                     selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) ?? Date()
-                    // todoModel.fetchData(for: selectedDate)
-                    updateTodayStatus()
                 }) {
                     Image(systemName: "arrow.right")
                         .font(.system(size: 20))
                 }
-                .opacity(isToday ? 0.5 : 1.0)
-                .opacity(isAfterToday ? 0.5 : 1.0)
-                .disabled(isAfterToday || isToday)
                 .padding()
             } // end of HStack
             ScrollView {
@@ -86,7 +79,7 @@ struct SummaryView: View {
                             }
                             .foregroundColor(.white)
                             .padding()
-                            .frame(width: 300, height: self.getHeight( timePair.startTime))
+                            .frame(width: 350, height: self.getHeight( timePair.startTime))
                             .background(
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(getBackgroundColor(for: task.category))
@@ -99,6 +92,10 @@ struct SummaryView: View {
                                 .foregroundColor(.black)
                                 .font(.system(size: 20))
                                 .padding()
+                            Image("clock-sad")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 150, height: 150)
                         }
                         
                     } // end of VStack
@@ -108,7 +105,6 @@ struct SummaryView: View {
             Spacer()
         }.onAppear{
             selectedDate = Date()
-            updateTodayStatus()
         }
     }
     
@@ -117,11 +113,6 @@ struct SummaryView: View {
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter
-    }
-        
-    func updateTodayStatus() {
-        isToday = Calendar.current.isDate(selectedDate, inSameDayAs: Date())
-        isAfterToday = selectedDate > Date()
     }
     
     func getBackgroundColor(for category: String) -> Color {
@@ -141,15 +132,16 @@ struct SummaryView: View {
     func getHeight(_ startTime: Timestamp)-> CGFloat {
         
         let duration:TimeInterval = todoModel.getDuration(startTime)
+        
+        // any instance less than 15 minutes will be set to minHeight
         let minHeight: CGFloat = 150
         let scaleFactor: CGFloat = 10
-       
-        // every 15 minutes, increase height by 5
+        
+        // every 15 minutes more, increase height by 5
         let scaledHeight = round((CGFloat(duration) - 900) / 900) * scaleFactor
         
         let height = minHeight + scaledHeight
         
-        // any instance than 15 minutes will be set to minHeight
         return max(height, scaledHeight)
     }
 }
