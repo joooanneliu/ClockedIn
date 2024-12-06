@@ -1,6 +1,8 @@
 <h1>Clocked In</h1>  
 This is a productivity app built on SwiftUI that will allow users to add customizable tasks and easily track the time spent on each task. The app will also provide a daily summary to show how much time over the day users spent on different tasks. 
 
+Here's the link to a quick video demo: https://youtube.com/shorts/gUUsfdctBtI?feature=share
+
 <h3>4/24 Status:</h3>
 The app has three main pages: to-do page, stopwatch page, and insights page.
 
